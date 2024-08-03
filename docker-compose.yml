@@ -1,0 +1,22 @@
+# version: "3.9" #version of docker compise syntax that we are going to be using
+
+# main block
+services:
+  app: # service is going to run our docker file 
+    build:
+      context: . # use the current dir, . is root dir, this config mean we want build docker file inside our current dir is root
+      args:
+        - DEV=true
+    ports:
+      - "8000:8000" # map port 8000 on our local machine to port 8000 inside our docker container, this is how we can access the network when we want connect to our server
+    volumes:
+      - ./app:/app # map dir from our system into docker container
+    command: > # command that is used to run service
+      sh -c "python manage.py runserver 0.0.0.0:8000" 
+
+    # The reason we add volumes config because we want
+    #  the updates that we make to our code in our local project to be reflected in the running container in real time.
+    #  So we don't want to have to rebuild the container. Every time we change a line of code, we want to automatically sync the code in our project to the cloud running in the container.
+
+
+    # run "docker-compose build" to build image 
