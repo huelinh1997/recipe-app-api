@@ -1,4 +1,4 @@
-# version: "3.9" #version of docker compise syntax that we are going to be using
+version: "3.9" #version of docker compise syntax that we are going to be using
 
 # main block
 services:
@@ -6,7 +6,7 @@ services:
     build:
       context: . # use the current dir, . is root dir, this config mean we want build docker file inside our current dir is root
       args:
-        - DEV=true
+        - DEV=true # if we're running using this docker compose. which we're only going to be using for dev
     ports:
       - "8000:8000" # map port 8000 on our local machine to port 8000 inside our docker container, this is how we can access the network when we want connect to our server
     volumes:
